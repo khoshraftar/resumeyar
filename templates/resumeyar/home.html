@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Resumeyar</title>
+    <title>رزومه یار</title>
     <style>
+        @font-face {
+            font-family: 'Vazir';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Vazir', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,8 +48,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Resumeyar</h1>
-        <a href="{% url 'oauth:login' %}" class="login-button">Login with Divar</a>
+        <h1>به رزومه یار خوش آمدید</h1>
+        <a href="{% url 'oauth:login' %}" class="login-button">ورود با دیوار</a>
     </div>
 </body>
 </html> 
