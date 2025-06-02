@@ -10,26 +10,32 @@ from urllib.parse import urlencode
 
 class OAuthLoginView(View):
     def get(self, request):
-        # If it's a direct access, show the redirect page
-        if not request.GET.get('redirected'):
-            return render(request, 'oauth/redirect.html')
-            
-        # If it's from the redirect page, proceed with OAuth
+        # Show the loading page first
+        return render(request, 'oauth/redirect.html')
+
+class OAuthRedirectView(View):
+    def get(self, request):
+        # Prepare OAuth parameters
         params = {
             'client_id': settings.OAUTH_CLIENT_ID,
             'redirect_uri': settings.OAUTH_REDIRECT_URI,
             'response_type': 'code',
             'scope': settings.OAUTH_SCOPE,
+            'state': 'random_state_string'  # You should generate and validate this
         }
+        
+        # Redirect to Divar's authorization page
         auth_url = f"{settings.OAUTH_AUTHORIZATION_URL}?{urlencode(params)}"
         return redirect(auth_url)
 
 class OAuthCallbackView(View):
     def get(self, request):
         code = request.GET.get('code')
+        state = request.GET.get('state')
+        
         if not code:
             return HttpResponse('Authorization code not received', status=400)
-
+            
         # Exchange code for access token
         token_data = {
             'client_id': settings.OAUTH_CLIENT_ID,
@@ -48,6 +54,16 @@ class OAuthCallbackView(View):
             request.session['access_token'] = token_info.get('access_token')
             request.session['refresh_token'] = token_info.get('refresh_token')
             
+            # Get user profile using the access token
+            headers = {'Authorization': f'Bearer {token_info["access_token"]}'}
+            profile_response = requests.get('https://api.divar.ir/v1/user/profile', headers=headers)
+            profile_response.raise_for_status()
+            user_profile = profile_response.json()
+            
+            # Store user profile in session
+            request.session['user_profile'] = user_profile
+            
             return redirect('home')  # Redirect to your home page or dashboard
+            
         except requests.exceptions.RequestException as e:
-            return HttpResponse(f'Error exchanging code for token: {str(e)}', status=400)
+            return HttpResponse(f'Error in OAuth flow: {str(e)}', status=400)

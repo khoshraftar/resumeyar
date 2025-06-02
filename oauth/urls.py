@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import OAuthLoginView, OAuthCallbackView
+from . import views
 
 app_name = 'oauth'
 
 urlpatterns = [
-    path('login/', OAuthLoginView.as_view(), name='login'),
-    path('login/redirect/', OAuthLoginView.as_view(), {'redirected': True}, name='login_redirect'),
-    path('callback/', OAuthCallbackView.as_view(), name='callback'),
+    path('', views.OAuthLoginView.as_view(), name='login'),
+    path('redirect/', views.OAuthRedirectView.as_view(), name='login_redirect'),
+    path('callback/', views.OAuthCallbackView.as_view(), name='callback'),
 ] 

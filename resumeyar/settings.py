@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Load environment variables from .env file
+load_dotenv()
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'resumeyar',
     'oauth',
 ]
 
@@ -121,12 +127,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # OAuth Settings
-OAUTH_CLIENT_ID = os.getenv('OAUTH_CLIENT_ID', '')
-OAUTH_CLIENT_SECRET = os.getenv('OAUTH_CLIENT_SECRET', '')
-OAUTH_REDIRECT_URI = os.getenv('OAUTH_REDIRECT_URI', 'http://localhost:8000/oauth/callback')
+OAUTH_CLIENT_ID = os.getenv('OAUTH_CLIENT_ID', 'amber-foam-healer')
+OAUTH_CLIENT_SECRET = os.getenv('OAUTH_CLIENT_SECRET', '').strip()  # Remove any whitespace
 OAUTH_AUTHORIZATION_URL = 'https://oauth.divar.ir/oauth2/auth'
 OAUTH_TOKEN_URL = 'https://oauth.divar.ir/oauth2/token'
-OAUTH_SCOPE = 'USER_ID USER_PHONE USER_POSTS_GET'
+OAUTH_REDIRECT_URI = os.getenv('OAUTH_REDIRECT_URI', 'http://resumeyar.data-line.ir/oauth/callback/')
+OAUTH_SCOPE = 'USER_PHONE' 
 
 # Session settings
 SESSION_COOKIE_SECURE = True
