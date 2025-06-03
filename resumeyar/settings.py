@@ -131,7 +131,7 @@ OAUTH_CLIENT_ID = os.getenv('OAUTH_CLIENT_ID', 'amber-foam-healer')
 OAUTH_CLIENT_SECRET = os.getenv('OAUTH_CLIENT_SECRET', '').strip()  # Remove any whitespace
 OAUTH_AUTHORIZATION_URL = 'https://oauth.divar.ir/oauth2/auth'
 OAUTH_TOKEN_URL = 'https://oauth.divar.ir/oauth2/token'
-OAUTH_REDIRECT_URI = os.getenv('OAUTH_REDIRECT_URI', 'http://resumeyar.data-line.ir/oauth/callback/')
+OAUTH_REDIRECT_URI = os.getenv('OAUTH_REDIRECT_URI', 'https://resumeyar.data-line.ir/oauth/callback/')
 OAUTH_SCOPE = 'USER_PHONE' 
 
 # Session settings

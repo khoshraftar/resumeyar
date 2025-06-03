@@ -23,7 +23,6 @@ class OAuthRedirectView(View):
             'scope': settings.OAUTH_SCOPE,
             'state': 'random_state_string'  # You should generate and validate this
         }
-        
         # Redirect to Divar's authorization page
         auth_url = f"{settings.OAUTH_AUTHORIZATION_URL}?{urlencode(params)}"
         return redirect(auth_url)
