@@ -54,10 +54,10 @@ class OAuthCallbackView(View):
             response = requests.post(token_url, data=data, headers=headers)
             response.raise_for_status()
             token_data = response.json()
-
-
-            # Get user ID from Divar API
+            
+            # Get user ID from Divar API using access token
             user_id_url = 'https://open-api.divar.ir/v1/open-platform/users'
+            headers['Authorization'] = f'Bearer {token_data["access_token"]}'
             user_id_response = requests.post(user_id_url, headers=headers, json={})
             user_id_response.raise_for_status()
             user_id_data = user_id_response.json()
