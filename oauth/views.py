@@ -61,7 +61,7 @@ class OAuthCallbackView(View):
             print(headers)
             
             # Store user profile in session            
-            return redirect('home')  # Redirect to your home page or dashboard
+            return redirect('dashboard')  # Redirect to dashboard instead of home
             
         except requests.exceptions.RequestException as e:
             return HttpResponse(f'Error in OAuth flow: {str(e)}', status=400)

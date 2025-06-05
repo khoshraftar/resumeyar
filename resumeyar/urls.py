@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('oauth/', include('oauth.urls')),
+    path('dashboard/', views.dashboard, name='dashboard'),
 ]
