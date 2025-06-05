@@ -30,7 +30,7 @@ SECRET_KEY = '&ta-0p=s97b9=!!3ap#^wg$neox=*(@ew9ep&u&n0hs(5l#i^2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["resumeyar.data-line.ir"]
 
 
 # Application definition
