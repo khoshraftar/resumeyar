@@ -5,6 +5,10 @@ from django.http import HttpResponse
 import requests
 import json
 from urllib.parse import urlencode
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.auth.backends import ModelBackend
+import hashlib
 
 # Create your views here.
 
@@ -30,38 +34,58 @@ class OAuthRedirectView(View):
 class OAuthCallbackView(View):
     def get(self, request):
         code = request.GET.get('code')
-        state = request.GET.get('state')
-        
         if not code:
-            return HttpResponse('Authorization code not received', status=400)
-            
-        # Exchange code for access token
-        token_data = {
+            return HttpResponse('No code provided', status=400)
+
+        # Exchange code for token
+        token_url = settings.OAUTH_TOKEN_URL
+        data = {
+            'grant_type': 'authorization_code',
+            'code': code,
+            'redirect_uri': settings.OAUTH_REDIRECT_URI,
             'client_id': settings.OAUTH_CLIENT_ID,
             'client_secret': settings.OAUTH_CLIENT_SECRET,
-            'code': code,
-            'grant_type': 'authorization_code',
-            'redirect_uri': settings.OAUTH_REDIRECT_URI,
+        }
+        headers = {
+            'X-API-KEY': settings.API_KEY,
         }
 
         try:
-            headers = {
-                'X-API-Key': settings.API_KEY
-            }
-            response = requests.post(settings.OAUTH_TOKEN_URL, data=token_data, headers=headers)
+            response = requests.post(token_url, data=data, headers=headers)
             response.raise_for_status()
-            token_info = response.json()
+            token_data = response.json()
 
-            # Store tokens in session
-            request.session['access_token'] = token_info.get('access_token')
-            request.session['refresh_token'] = token_info.get('refresh_token')
-            
-            # Get user profile using the access token
-            headers = {'Authorization': f'Bearer {token_info["access_token"]}'}
-            print(headers)
-            
-            # Store user profile in session            
-            return redirect('dashboard')  # Redirect to dashboard instead of home
-            
+
+            # Get user ID from Divar API
+            user_id_url = 'https://open-api.divar.ir/v1/open-platform/users'
+            user_id_response = requests.post(user_id_url, headers=headers, json={})
+            user_id_response.raise_for_status()
+            user_id_data = user_id_response.json()
+            user_id = user_id_data.get('user_id')
+
+            if not user_id:
+                return HttpResponse('Failed to get user ID', status=400)
+
+            # Get or create user
+            user, created = User.objects.get_or_create(
+                username=user_id,  # Use user_id as username
+                defaults={
+                    'is_active': True,
+                }
+            )
+
+            # Set session data with user ID only
+            request.session['user_id'] = user_id
+
+            # Log the user in
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+
+            return redirect('dashboard:dashboard')
+
         except requests.exceptions.RequestException as e:
-            return HttpResponse(f'Error in OAuth flow: {str(e)}', status=400)
+            return HttpResponse(f'Error: {str(e)}', status=500)
+
+def logout(request):
+    # Clear session data
+    request.session.flush()
+    return redirect('home')

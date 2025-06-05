@@ -2,17 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import ResumeForm
+from .models import Resume
 
-@login_required
+@login_required(login_url='oauth:login')
 def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
 
-@login_required
+@login_required(login_url='oauth:login')
 def my_resumes(request):
-    # TODO: Add resume list logic
-    return render(request, 'dashboard/my_resumes.html')
+    resumes = Resume.objects.filter(user=request.user)
+    return render(request, 'dashboard/my_resumes.html', {'resumes': resumes})
 
-@login_required
+@login_required(login_url='oauth:login')
 def create_resume(request):
     if request.method == 'POST':
         form = ResumeForm(request.POST)
@@ -20,22 +21,27 @@ def create_resume(request):
             resume = form.save(commit=False)
             resume.user = request.user
             resume.save()
-            return redirect('my_resumes')
+            return redirect('dashboard:my_resumes')
     else:
         form = ResumeForm()
     return render(request, 'dashboard/create_resume.html', {'form': form})
 
-@login_required
+@login_required(login_url='oauth:login')
 def edit_resume(request, resume_id):
-    # TODO: Add resume editing logic
-    return render(request, 'dashboard/edit_resume.html')
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, instance=resume)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:my_resumes')
+    else:
+        form = ResumeForm(instance=resume)
+    return render(request, 'dashboard/edit_resume.html', {'form': form, 'resume': resume})
 
-@login_required
+@login_required(login_url='oauth:login')
 def resume_templates(request):
-    # TODO: Add templates list logic
     return render(request, 'dashboard/templates.html')
 
-@login_required
+@login_required(login_url='oauth:login')
 def settings(request):
-    # TODO: Add settings logic
     return render(request, 'dashboard/settings.html')
