@@ -46,6 +46,9 @@ class OAuthCallbackView(View):
             'client_id': settings.OAUTH_CLIENT_ID,
             'client_secret': settings.OAUTH_CLIENT_SECRET,
         }
+        headers = {
+            'X-API-Key': settings.API_KEY,
+        }
 
         try:
             response = requests.post(token_url, data=data, headers=headers)
