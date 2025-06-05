@@ -45,7 +45,10 @@ class OAuthCallbackView(View):
         }
 
         try:
-            response = requests.post(settings.OAUTH_TOKEN_URL, data=token_data)
+            headers = {
+                'X-API-Key': settings.API_KEY
+            }
+            response = requests.post(settings.OAUTH_TOKEN_URL, data=token_data, headers=headers)
             response.raise_for_status()
             token_info = response.json()
 
@@ -55,13 +58,9 @@ class OAuthCallbackView(View):
             
             # Get user profile using the access token
             headers = {'Authorization': f'Bearer {token_info["access_token"]}'}
-            profile_response = requests.get('https://api.divar.ir/v1/user/profile', headers=headers)
-            profile_response.raise_for_status()
-            user_profile = profile_response.json()
+            print(headers)
             
-            # Store user profile in session
-            request.session['user_profile'] = user_profile
-            
+            # Store user profile in session            
             return redirect('home')  # Redirect to your home page or dashboard
             
         except requests.exceptions.RequestException as e:
