@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'resumeyar',
     'oauth',
     'dashboard',
+    'events',
 ]
 
 MIDDLEWARE = [
