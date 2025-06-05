@@ -16,15 +16,6 @@ def log_request(request):
         except json.JSONDecodeError:
             body = {'raw_body': request.body.decode('utf-8', errors='ignore')}
     
-    # Create response data
-    response_data = {
-        'method': request.method,
-        'headers': headers,
-        'body': body,
-        'path': request.path,
-        'query_params': dict(request.GET.items()),
-    }
-    
     # Print to console
     print("\n=== Request Details ===")
     print(f"Method: {request.method}")
@@ -37,4 +28,4 @@ def log_request(request):
     print(json.dumps(dict(request.GET.items()), indent=2))
     print("=====================\n")
     
-    return HttpResponse(json.dumps(response_data, indent=2), content_type='application/json')
+    return HttpResponse("OK")
