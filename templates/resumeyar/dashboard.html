@@ -153,16 +153,16 @@
             <div class="sidebar">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">داشبورد</a>
+                        <a href="{% url 'dashboard' %}" class="nav-link active">داشبورد</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">رزومه‌های من</a>
+                        <a href="{% url 'my_resumes' %}" class="nav-link">رزومه‌های من</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">قالب‌های رزومه</a>
+                        <a href="{% url 'resume_templates' %}" class="nav-link">قالب‌های رزومه</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">تنظیمات</a>
+                        <a href="{% url 'settings' %}" class="nav-link">تنظیمات</a>
                     </li>
                 </ul>
             </div>
@@ -177,19 +177,19 @@
                     <div class="action-card">
                         <h3>ساخت رزومه جدید</h3>
                         <p>با استفاده از قالب‌های حرفه‌ای، رزومه جدید بسازید</p>
-                        <a href="#" class="btn">شروع کنید</a>
+                        <a href="{% url 'create_resume' %}" class="btn">شروع کنید</a>
                     </div>
 
                     <div class="action-card">
                         <h3>مدیریت رزومه‌ها</h3>
                         <p>رزومه‌های موجود خود را ویرایش و مدیریت کنید</p>
-                        <a href="#" class="btn">مشاهده رزومه‌ها</a>
+                        <a href="{% url 'my_resumes' %}" class="btn">مشاهده رزومه‌ها</a>
                     </div>
 
                     <div class="action-card">
                         <h3>قالب‌های جدید</h3>
                         <p>قالب‌های جدید و حرفه‌ای را مشاهده کنید</p>
-                        <a href="#" class="btn">مشاهده قالب‌ها</a>
+                        <a href="{% url 'resume_templates' %}" class="btn">مشاهده قالب‌ها</a>
                     </div>
                 </div>
             </div>
