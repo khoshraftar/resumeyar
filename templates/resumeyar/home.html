@@ -69,6 +69,31 @@
             padding: 20px;
             color: #7f8c8d;
         }
+        .login-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .login-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .login-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -93,6 +118,10 @@
                 <h2>بهینه‌سازی برای آگهی‌ها</h2>
                 <p>رزومه خود را با توجه به نیازهای هر آگهی شغلی بهینه کنید و شانس استخدام خود را افزایش دهید.</p>
             </div>
+        </div>
+
+        <div class="login-section">
+            <a href="{% url 'oauth:login' %}" class="login-button">ورود با دیوار</a>
         </div>
 
         <div class="footer">
