@@ -87,7 +87,10 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h1 class="form-title">ساخت رزومه جدید</h1>
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-900">Create New Resume</h1>
+                <a href="{% url 'dashboard:dashboard' %}" class="text-blue-600 hover:text-blue-800">Back to Dashboard</a>
+            </div>
             <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
@@ -100,4 +103,7 @@
                 <button type="submit" class="btn-submit">ذخیره رزومه</button>
             </form>
         </div>
+    </div>
+</body>
+</html>
  

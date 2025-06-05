@@ -21,12 +21,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('oauth/', include('oauth.urls')),
+    path('dashboard/', include('dashboard.urls')),
     
-    # Dashboard URLs
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('dashboard/resumes/', views.my_resumes, name='my_resumes'),
-    path('dashboard/resumes/create/', views.create_resume, name='create_resume'),
-    path('dashboard/resumes/<int:resume_id>/', views.edit_resume, name='edit_resume'),
-    path('dashboard/templates/', views.resume_templates, name='resume_templates'),
-    path('dashboard/settings/', views.settings, name='settings'),
 ]

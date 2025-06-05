@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'resumeyar',
     'oauth',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

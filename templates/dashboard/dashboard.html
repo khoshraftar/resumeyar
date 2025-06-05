@@ -174,23 +174,22 @@
                 </div>
 
                 <div class="action-buttons">
-                    <div class="action-card">
-                        <h3>ساخت رزومه جدید</h3>
-                        <p>با استفاده از قالب‌های حرفه‌ای، رزومه جدید بسازید</p>
-                        <a href="{% url 'create_resume' %}" class="btn">شروع کنید</a>
-                    </div>
-
-                    <div class="action-card">
-                        <h3>مدیریت رزومه‌ها</h3>
-                        <p>رزومه‌های موجود خود را ویرایش و مدیریت کنید</p>
-                        <a href="{% url 'my_resumes' %}" class="btn">مشاهده رزومه‌ها</a>
-                    </div>
-
-                    <div class="action-card">
-                        <h3>قالب‌های جدید</h3>
-                        <p>قالب‌های جدید و حرفه‌ای را مشاهده کنید</p>
-                        <a href="{% url 'resume_templates' %}" class="btn">مشاهده قالب‌ها</a>
-                    </div>
+                    <a href="{% url 'dashboard:create_resume' %}" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-50">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Create New Resume</h5>
+                        <p class="font-normal text-gray-700">Start building your professional resume with our easy-to-use editor.</p>
+                    </a>
+                    <a href="{% url 'dashboard:my_resumes' %}" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-50">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">My Resumes</h5>
+                        <p class="font-normal text-gray-700">View and manage your existing resumes.</p>
+                    </a>
+                    <a href="{% url 'dashboard:resume_templates' %}" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-50">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Resume Templates</h5>
+                        <p class="font-normal text-gray-700">Browse and use professional resume templates.</p>
+                    </a>
+                    <a href="{% url 'dashboard:settings' %}" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-50">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Settings</h5>
+                        <p class="font-normal text-gray-700">Manage your account settings and preferences.</p>
+                    </a>
                 </div>
             </div>
         </div>
