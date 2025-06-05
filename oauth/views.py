@@ -46,9 +46,6 @@ class OAuthCallbackView(View):
             'client_id': settings.OAUTH_CLIENT_ID,
             'client_secret': settings.OAUTH_CLIENT_SECRET,
         }
-        headers = {
-            'X-API-KEY': settings.API_KEY,
-        }
 
         try:
             response = requests.post(token_url, data=data, headers=headers)
@@ -57,7 +54,10 @@ class OAuthCallbackView(View):
             
             # Get user ID from Divar API using access token
             user_id_url = 'https://open-api.divar.ir/v1/open-platform/users'
-            headers['Authorization'] = f'Bearer {token_data["access_token"]}'
+            headers = {
+                'X-API-Key': settings.API_KEY,
+                'Authorization': f'Bearer {token_data["access_token"]}'
+            }
             user_id_response = requests.post(user_id_url, headers=headers, json={})
             user_id_response.raise_for_status()
             user_id_data = user_id_response.json()
