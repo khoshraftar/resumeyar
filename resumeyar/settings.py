@@ -134,6 +134,9 @@ OAUTH_TOKEN_URL = 'https://oauth.divar.ir/oauth2/token'
 OAUTH_REDIRECT_URI = os.getenv('OAUTH_REDIRECT_URI', 'https://resumeyar.data-line.ir/oauth/callback/')
 OAUTH_SCOPE = 'USER_PHONE' 
 
+# API Key for OAuth token calls
+API_KEY = os.getenv('API_KEY', '').strip()  # Remove any whitespace
+
 # Session settings
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
