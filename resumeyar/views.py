@@ -6,6 +6,9 @@ from .forms import ResumeForm
 def home(request):
     return render(request, 'resumeyar/home.html')
 
+def about(request):
+    return render(request, 'resumeyar/about.html')
+
 @login_required
 def dashboard(request):
     return render(request, 'resumeyar/dashboard.html')
