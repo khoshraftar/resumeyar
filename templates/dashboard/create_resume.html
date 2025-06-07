@@ -1,109 +1,124 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ساخت رزومه جدید - رزومه یار</title>
-    <style>
-        @font-face {
-            font-family: 'Vazir';
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body {
-            font-family: 'Vazir', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-        .form-title {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            font-family: 'Vazir', Arial, sans-serif;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
-        .btn-submit {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .btn-submit:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        .error-message {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="form-container">
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold text-gray-900">Create New Resume</h1>
-                <a href="{% url 'dashboard:dashboard' %}" class="text-blue-600 hover:text-blue-800">Back to Dashboard</a>
-            </div>
-            <form method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field.errors }}
-                    {{ field }}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ساخت رزومه جدید - رزومه یار{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <!-- Sidebar -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">منو</h5>
+                    <div class="list-group list-group-flush">
+                        <a href="{% url 'dashboard:dashboard' %}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-home me-2"></i>
+                            داشبورد
+                        </a>
+                        <a href="{% url 'dashboard:my_resumes' %}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-file-alt me-2"></i>
+                            رزومه‌های من
+                        </a>
+                        <a href="{% url 'dashboard:resume_templates' %}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-palette me-2"></i>
+                            قالب‌ها
+                        </a>
+                        <a href="{% url 'dashboard:settings' %}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-cog me-2"></i>
+                            تنظیمات
+                        </a>
+                        <a href="{% url 'oauth:logout' %}" class="list-group-item list-group-item-action text-danger">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            خروج
+                        </a>
+                    </div>
                 </div>
-                {% endfor %}
-                <button type="submit" class="btn-submit">ذخیره رزومه</button>
-            </form>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <!-- Main Content -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">ساخت رزومه جدید</h4>
+                    
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="title" class="form-label">عنوان رزومه</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                            <div class="invalid-feedback">
+                                لطفاً عنوان رزومه را وارد کنید
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="template" class="form-label">قالب رزومه</label>
+                            <select class="form-select" id="template" name="template" required>
+                                <option value="">قالب را انتخاب کنید</option>
+                                <option value="modern">مدرن</option>
+                                <option value="professional">حرفه‌ای</option>
+                                <option value="creative">خلاقانه</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                لطفاً قالب رزومه را انتخاب کنید
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">اطلاعات شخصی</label>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="first_name" placeholder="نام" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="last_name" placeholder="نام خانوادگی" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" placeholder="ایمیل" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control" name="phone" placeholder="شماره تماس" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'dashboard:dashboard' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-right me-2"></i>
+                                بازگشت
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>
+                                ذخیره و ادامه
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+{% block extra_js %}
+<script>
+    // Form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %}
+{% endblock %}
  
