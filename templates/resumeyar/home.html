@@ -1,133 +1,49 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رزومه یار</title>
-    <style>
-        @font-face {
-            font-family: 'Vazir';
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body {
-            font-family: 'Vazir', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .header h1 {
-            font-size: 2.5em;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        .header p {
-            font-size: 1.2em;
-            color: #7f8c8d;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .feature-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        .feature-card h2 {
-            color: #3498db;
-            margin-bottom: 15px;
-        }
-        .feature-card p {
-            color: #666;
-            margin: 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 60px;
-            padding: 20px;
-            color: #7f8c8d;
-        }
-        .login-section {
-            text-align: center;
-            margin-top: 50px;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-        .login-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .login-button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>به رزومه یار خوش آمدید</h1>
-            <p>سامانه هوشمند ساخت و مدیریت رزومه حرفه‌ای</p>
-        </div>
+{% extends 'base.html' %}
+{% load static %}
 
-        <div class="features">
-            <div class="feature-card">
-                <h2>ساخت رزومه حرفه‌ای</h2>
-                <p>با استفاده از قالب‌های استاندارد و حرفه‌ای، رزومه‌ای تاثیرگذار بسازید که توجه کارفرمایان را جلب کند.</p>
-            </div>
+{% block title %}رزومه یار - سامانه هوشمند ساخت و مدیریت رزومه حرفه‌ای{% endblock %}
 
-            <div class="feature-card">
-                <h2>مدیریت هوشمند</h2>
-                <p>رزومه خود را به صورت هوشمند مدیریت کنید و از پیشنهادات هوشمند برای بهبود محتوا بهره‌مند شوید.</p>
-            </div>
+{% block content %}
+<div class="container py-5">
+    <div class="header text-center mb-5">
+        <h1 class="display-4">به رزومه یار خوش آمدید</h1>
+        <p class="lead">سامانه هوشمند ساخت و مدیریت رزومه حرفه‌ای</p>
+    </div>
 
-            <div class="feature-card">
-                <h2>بهینه‌سازی برای آگهی‌ها</h2>
-                <p>رزومه خود را با توجه به نیازهای هر آگهی شغلی بهینه کنید و شانس استخدام خود را افزایش دهید.</p>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 text-primary mb-3">ساخت رزومه حرفه‌ای</h2>
+                    <p>با استفاده از قالب‌های استاندارد و حرفه‌ای، رزومه‌ای تاثیرگذار بسازید که توجه کارفرمایان را جلب کند.</p>
+                </div>
             </div>
         </div>
 
-        <div class="login-section">
-            <a href="{% url 'oauth:login' %}" class="login-button">ورود با دیوار</a>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 text-primary mb-3">مدیریت هوشمند</h2>
+                    <p>رزومه خود را به صورت هوشمند مدیریت کنید و از پیشنهادات هوشمند برای بهبود محتوا بهره‌مند شوید.</p>
+                </div>
+            </div>
         </div>
 
-        <div class="footer">
-            <p>رزومه یار - همراه شما در مسیر موفقیت شغلی</p>
-            <p><a href="{% url 'about' %}" style="color: #3498db; text-decoration: none;">درباره ما</a></p>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 text-primary mb-3">بهینه‌سازی برای آگهی‌ها</h2>
+                    <p>رزومه خود را با توجه به نیازهای هر آگهی شغلی بهینه کنید و شانس استخدام خود را افزایش دهید.</p>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html> 
+
+    <div class="text-center mt-5">
+        <a href="{% url 'oauth:login' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-sign-in-alt me-2"></i>
+            ورود با دیوار
+        </a>
+    </div>
+</div>
+{% endblock %} 

@@ -1,29 +1,28 @@
-{% extends 'resumeyar/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About Us - Resumeyar{% endblock %}
+{% block title %}درباره ما - رزومه یار{% endblock %}
 
 {% block content %}
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8 mx-auto">
-            <h1 class="display-4 text-center mb-4">About Resumeyar</h1>
+            <h1 class="display-4 text-center mb-4">درباره رزومه یار</h1>
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-                    <h2 class="h4 mb-3">Our Mission</h2>
+                    <h2 class="h4 mb-3">ماموریت ما</h2>
                     <p class="lead mb-4">
-                        At Resumeyar, we're dedicated to helping job seekers create professional, 
-                        ATS-friendly resumes that stand out in today's competitive job market.
+                        در رزومه یار، ما متعهد به کمک به جویندگان کار برای ایجاد رزومه‌های حرفه‌ای و سازگار با سیستم‌های ATS هستیم که در بازار کار رقابتی امروز برجسته شوند.
                     </p>
 
-                    <h2 class="h4 mb-3">What We Offer</h2>
+                    <h2 class="h4 mb-3">خدمات ما</h2>
                     <div class="row g-4 mb-4">
                         <div class="col-md-6">
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-file-alt text-primary me-3 fa-2x"></i>
                                 <div>
-                                    <h3 class="h5 mb-2">Professional Templates</h3>
-                                    <p class="mb-0">Modern, clean designs that catch recruiters' attention</p>
+                                    <h3 class="h5 mb-2">قالب‌های حرفه‌ای</h3>
+                                    <p class="mb-0">طراحی‌های مدرن و تمیز که توجه کارفرمایان را جلب می‌کند</p>
                                 </div>
                             </div>
                         </div>
@@ -31,8 +30,8 @@
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-robot text-primary me-3 fa-2x"></i>
                                 <div>
-                                    <h3 class="h5 mb-2">AI-Powered Suggestions</h3>
-                                    <p class="mb-0">Smart recommendations to improve your content</p>
+                                    <h3 class="h5 mb-2">پیشنهادات هوشمند</h3>
+                                    <p class="mb-0">توصیه‌های هوشمند برای بهبود محتوا</p>
                                 </div>
                             </div>
                         </div>
@@ -40,8 +39,8 @@
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-check-circle text-primary me-3 fa-2x"></i>
                                 <div>
-                                    <h3 class="h5 mb-2">ATS Optimization</h3>
-                                    <p class="mb-0">Ensure your resume passes automated screening</p>
+                                    <h3 class="h5 mb-2">بهینه‌سازی ATS</h3>
+                                    <p class="mb-0">اطمینان از عبور رزومه شما از غربالگری خودکار</p>
                                 </div>
                             </div>
                         </div>
@@ -49,43 +48,41 @@
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-download text-primary me-3 fa-2x"></i>
                                 <div>
-                                    <h3 class="h5 mb-2">Multiple Formats</h3>
-                                    <p class="mb-0">Download in PDF, Word, or other formats</p>
+                                    <h3 class="h5 mb-2">فرمت‌های متنوع</h3>
+                                    <p class="mb-0">دانلود در فرمت‌های PDF، Word و سایر فرمت‌ها</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <h2 class="h4 mb-3">Our Story</h2>
+                    <h2 class="h4 mb-3">داستان ما</h2>
                     <p class="mb-4">
-                        Resumeyar was born from a simple observation: creating a professional resume 
-                        shouldn't be complicated. We combined modern technology with user-friendly 
-                        design to create a platform that makes resume building accessible to everyone.
+                        رزومه یار از یک مشاهده ساده متولد شد: ایجاد یک رزومه حرفه‌ای نباید پیچیده باشد. ما فناوری مدرن را با طراحی کاربرپسند ترکیب کردیم تا پلتفرمی ایجاد کنیم که ساخت رزومه را برای همه در دسترس قرار دهد.
                     </p>
 
-                    <h2 class="h4 mb-3">Why Choose Us?</h2>
+                    <h2 class="h4 mb-3">چرا ما را انتخاب کنید؟</h2>
                     <ul class="list-unstyled mb-4">
                         <li class="mb-2">
                             <i class="fas fa-check text-success me-2"></i>
-                            User-friendly interface
+                            رابط کاربری آسان
                         </li>
                         <li class="mb-2">
                             <i class="fas fa-check text-success me-2"></i>
-                            Professional templates
+                            قالب‌های حرفه‌ای
                         </li>
                         <li class="mb-2">
                             <i class="fas fa-check text-success me-2"></i>
-                            AI-powered suggestions
+                            پیشنهادات هوشمند
                         </li>
                         <li class="mb-2">
                             <i class="fas fa-check text-success me-2"></i>
-                            Regular updates and improvements
+                            به‌روزرسانی‌های منظم
                         </li>
                     </ul>
 
                     <div class="text-center mt-5">
                         <a href="{% url 'resumeyar:create_resume' %}" class="btn btn-primary btn-lg">
-                            Create Your Resume Now
+                            ساخت رزومه
                         </a>
                     </div>
                 </div>
